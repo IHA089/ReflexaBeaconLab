@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <section class="dashboard-section">
+        <h2>Welcome Back, {{ user.username }}!</h2>
+        <p class="section-subheading">Your personal hub to manage your AI tokens, access your purchased AIs, and adjust your profile settings.</p>
+        <div class="dashboard-container">
+            <aside class="dashboard-sidebar">
+                <button class="dash-btn active" id="your-ai-btn">Your AIs</button>
+                <button class="dash-btn" id="your-tokens-btn">Your Tokens</button>
+                <button class="dash-btn" id="profile-btn">Profile</button>
+            </aside>
+            <div class="dashboard-content">
+                <div id="your-ai-content" class="content-panel active">
+                    <h3>Your Acquired AIs</h3>
+                    <div class="ai-grid">
+                        {% if user_ais %}
+                            {% for ai in user_ais %}
+                            <div class="ai-card">
+                                <img src="{{ url_for('static', filename=ai.icon_url) }}" alt="{{ ai.name }} icon">
+                                <h3>{{ ai.name }}</h3>
+                                <p>Tokens: {{ ai.tokens_purchased }}</p>
+                                <div class="card-overlay">
+                                    <button class="btn-primary">Use AI</button>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>You haven't purchased any AIs yet. Explore our <a href="{{ url_for('ai_page') }}">AI Services page</a> to get started!</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="your-tokens-content" class="content-panel">
+                    <h3>Your Total Tokens</h3>
+                    <div class="token-info">
+                        <p class="token-count">{{ total_tokens }}</p>
+                        <p>total tokens from all your AI services.</p>
+                    </div>
+                    <p class="section-subheading">Tokens are associated with each specific AI and are not shared. You can purchase more tokens on the AI Services page.</p>
+                </div>
+                <div id="profile-content" class="content-panel">
+                    <h3>Profile Settings</h3>
+                    <form>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" value="{{ user.username }}" readonly>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" value="{{ user.email }}" readonly>
+                        <label for="profile_pic">Profile Picture URL:</label>
+                        <input type="text" id="profile_pic" value="{{ user.profile_pic or '' }}">
+                        <label for="social_links">Social Links:</label>
+                        <input type="text" id="social_links" value="{{ user.social_links or '' }}">
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

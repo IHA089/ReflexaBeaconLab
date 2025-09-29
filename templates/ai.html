@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Explore AIs{% endblock %}
+{% block content %}
+    <section class="ai-list-section">
+        <h2>Available AI Services</h2>
+        <p class="section-subheading">Explore and acquire tokens for the latest AI models to supercharge your projects.</p>
+        <div class="ai-grid">
+            {% for ai in ais %}
+            <div class="ai-card" data-ai-id="{{ ai.id }}">
+                <img src="{{ url_for('static', filename=ai.icon_url) }}" alt="{{ ai.name }} icon">
+                <h3>{{ ai.name }}</h3>
+                <p>{{ ai.description }}</p>
+                <div class="card-overlay">
+                    <button class="btn-buy" data-ai-id="{{ ai.id }}">Buy Token</button>
+                    <button class="btn-details" data-ai-id="{{ ai.id }}">View Details</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                </div>
+        </div>
+    </div>
+{% endblock %}

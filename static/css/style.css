@@ -1,0 +1,538 @@
+:root {
+    --bg-color: #0d0d0d;
+    --card-bg: #1a1a1a;
+    --text-color: #e0e0e0;
+    --accent-color: #00e5ff;
+    --btn-hover-color: #00c0d8;
+    --border-color: #333;
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* -------------------- Header -------------------- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #121212;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+header nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+header nav a:hover {
+    color: var(--accent-color);
+}
+
+main {
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+
+/* -------------------- General Elements -------------------- */
+h1, h2, h3 {
+    color: #fff;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.section-subheading {
+    text-align: center;
+    color: #a0a0a0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.btn-primary, .btn-buy, .btn-details {
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--card-bg);
+    margin-top: 30px;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-hover-color);
+}
+
+.btn-details {
+    color: var(--accent-color);
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+}
+
+.btn-details:hover {
+    background-color: var(--accent-color);
+    color: var(--card-bg);
+}
+
+.btn-buy {
+    background-color: #333;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-buy:hover {
+    background-color: var(--accent-color);
+    color: var(--card-bg);
+}
+
+/* -------------------- Homepage Layout -------------------- */
+.hero-section {
+    text-align: center;
+    padding: 6rem 2rem;
+}
+
+.hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: #b0b0b0;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.features-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.feature-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.feature-box {
+    width: 60%;
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    gap: 2rem;
+}
+
+.feature-icon {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    background-color: #2a2a2a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feature-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.feature-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.feature-left {
+    margin-right: 30px;
+}
+
+.feature-right {
+    margin-left: 30px;
+}
+
+.feature-box-spacer {
+    width: 40%;
+}
+
+.cta-section {
+    text-align: center;
+    background-color: #121212;
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+}
+
+/* -------------------- AI Card Grid & Hover -------------------- */
+.ai-list-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ai-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.ai-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.ai-card h3 {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+}
+
+.ai-card p {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    flex-grow: 1;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ai-card:hover .card-overlay {
+    opacity: 1;
+}
+
+.card-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* -------------------- Login/Register Forms -------------------- */
+.form-container {
+    max-width: 450px;
+    margin: auto;
+    padding: 2.5rem;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    
+}
+
+.form-container h2 {
+    margin-bottom: 1rem;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container label {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.form-container input {
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    color: var(--text-color);
+    border-radius: 5px;
+}
+
+.form-link-text {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.error-msg {
+    color: var(--error-color);
+    text-align: center;
+}
+
+/* -------------------- Dashboard Layout -------------------- */
+.dashboard-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.dashboard-sidebar {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dash-btn {
+    background-color: #2a2a2a;
+    color: var(--text-color);
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dash-btn:hover, .dash-btn.active {
+    background-color: var(--accent-color);
+    color: var(--card-bg);
+}
+
+.dashboard-content {
+    width: 80%;
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.content-panel {
+    display: none;
+}
+
+.content-panel.active {
+    display: block;
+}
+
+.token-info {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.token-count {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+/* -------------------- Popup Modal -------------------- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 10% auto;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: var(--accent-color);
+}
+
+.modal-body {
+    padding-top: 1rem;
+}
+
+.modal-body h3 {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+}
+
+.modal-body p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* -------------------- New Footer Styles -------------------- */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem 5%;
+    background-color: #121212;
+    color: #a0a0a0;
+    border-top: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-column {
+    flex: 1 1 30%; /* Three columns, takes up 30% width */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer-column:nth-child(2) {
+    text-align: center;
+}
+
+.footer-column:last-child {
+    text-align: right;
+}
+
+.footer-column h5 {
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.footer-column p,
+.footer-column a {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    text-decoration: none;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.footer-column a:hover {
+    color: var(--accent-color);
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.socials a {
+    font-size: 1.5rem;
+    color: #a0a0a0;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: var(--accent-color);
+}
+
+.footer-bottom {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.footer-links li a {
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 0.9rem;
+}

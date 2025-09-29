@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <section class="hero-section">
+        <h1>Unleash Your Genius. All the AI You Need, In One Hub.</h1>
+        <p>Stop juggling multiple subscriptions. We provides seamless, token-based access to the world's most powerful AI models, from creativity and coding to data analysis and more.</p>
+        <a href="{{ url_for('ai_page') }}" class="btn-primary">Get Started</a>
+    </section>
+    
+    <section class="features-section">
+        <div class="feature-row">
+            <div class="feature-box feature-left">
+                <div class="feature-icon">
+                    <img src="{{ url_for('static', filename='images/icon-access.png') }}" alt="Unified Access Icon">
+                </div>
+                <div class="feature-content">
+                    <h3>One Platform, Endless Possibilities.</h3>
+                    <p>AI Hub brings together a diverse and powerful collection of AI models. Whether you're a developer needing an AI assistant, a creative artist looking for a new medium, or a data analyst seeking deeper insights, our platform provides unified access to the tools you need. No more managing multiple accounts or juggling subscriptions—everything is accessible with a single login and a shared token system. This streamlined approach allows you to focus on innovation, not administration.</p>
+                </div>
+            </div>
+            <div class="feature-box-spacer"></div>
+        </div>
+        <div class="feature-row">
+            <div class="feature-box-spacer"></div>
+            <div class="feature-box feature-right">
+                <div class="feature-icon">
+                    <img src="{{ url_for('static', filename='images/icon-token.png') }}" alt="Token Icon">
+                </div>
+                <div class="feature-content">
+                    <h3>Generous Daily Tokens.</h3>
+                    <p>We believe in empowering every user. That's why every account is credited with a generous allocation of 10,000 free tokens each day. This gives you the freedom to explore, experiment, and integrate various AIs into your projects without any upfront cost or commitment. You can test the capabilities of different models and find the perfect AI for your specific needs, making AI technology more accessible and democratized for everyone.</p>
+                </div>
+            </div>
+        </div>
+        <div class="feature-row">
+            <div class="feature-box feature-left">
+                <div class="feature-icon">
+                    <img src="{{ url_for('static', filename='images/icon-curated.png') }}" alt="Curated AIs Icon">
+                </div>
+                <div class="feature-content">
+                    <h3>Best-in-Class AIs.</h3>
+                    <p>Quality and performance are our top priorities. Our team of experts rigorously selects and integrates only the most effective and innovative AI tools available. We partner with leading AI providers to ensure that you have access to cutting-edge models that are reliable and powerful. From the latest language models to advanced image generators and specialized tools, our curated collection ensures you're always working with the best technology on the market.</p>
+                </div>
+            </div>
+            <div class="feature-box-spacer"></div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Transform Your Workflow?</h2>
+        <p>Join a community of innovators and creators. Sign up in seconds and start using powerful AI today.</p>
+        <a href="{{ url_for('register') }}" class="btn-primary">Create a Free Account</a>
+    </section>
+{% endblock %}
