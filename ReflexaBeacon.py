@@ -19,21 +19,19 @@ web_app_name = "ReflexaBeacon"
 ReflexaBeacon = Flask(__name__)
 ReflexaBeacon.secret_key = "vulnerable_lab_by_IHA089"
 
-# Setup the Flask-JWT-Extended extension
-ReflexaBeacon.config["JWT_SECRET_KEY"] = "Hacking_is_our_vision_and_mission"  # Change this in production!
+ReflexaBeacon.config["JWT_SECRET_KEY"] = "Hacking_is_our_vision_and_mission"  
 ReflexaBeacon.config["JWT_TOKEN_LOCATION"] = ["cookies"]
-ReflexaBeacon.config["JWT_COOKIE_SECURE"] = True  # Set to True in production for HTTPS
-ReflexaBeacon.config["JWT_COOKIE_CSRF_PROTECT"] = True  # Recommended for CSRF protection
+ReflexaBeacon.config["JWT_COOKIE_SECURE"] = True  
+ReflexaBeacon.config["JWT_COOKIE_CSRF_PROTECT"] = True  
 
 jwt = JWTManager(ReflexaBeacon)
 
 print(web_app_name)
 
-# Configure CORS to allow credentials (cookies)
 CORS(ReflexaBeacon, supports_credentials=True)
 
 def init_db():
-    db_path = os.path.join(os.getcwd(), lab_type, lab_name, 'database.db')
+    db_path = os.path.join(os.getcwd(), "Labs", lab_type, lab_name, 'database.db')
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -49,7 +47,6 @@ def init_db():
         );
     ''')
 
-    # Create the ai_services table
     cursor.execute('''
         CREATE TABLE ai_services (
             id INTEGER PRIMARY KEY,
@@ -60,7 +57,6 @@ def init_db():
         );
     ''')
 
-    # Create the user_ais table with the new tokens_purchased column
     cursor.execute('''
         CREATE TABLE user_ais (
             id INTEGER PRIMARY KEY,
@@ -73,7 +69,6 @@ def init_db():
         );
     ''')
 
-    # Populate with some sample AI data
     sample_ais = [
         ('GPT-4', 'A powerful large language model for creative and technical tasks.', 'images/gpt4.png', 100),
         ('DALL-E 3', 'Generates stunning images from text descriptions.', 'images/dalle3.png', 150),
@@ -92,14 +87,14 @@ def init_db():
 
 
 def check_database():
-    db_path = os.path.join(os.getcwd(), lab_type, lab_name, 'database.db')
+    db_path = os.path.join(os.getcwd(), "Labs", lab_type, lab_name, 'database.db')
     if not os.path.isfile(db_path):
         init_db()
 
 check_database()
 
 def get_db_connection():
-    db_path = os.path.join(os.getcwd(), lab_type, lab_name, 'database.db')
+    db_path = os.path.join(os.getcwd(), "Labs", lab_type, lab_name, 'database.db')
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
@@ -167,7 +162,6 @@ def login():
         conn.close()
 
         if user and check_password_hash(user['password_hash'], password):
-            # Convert user['id'] from integer to string before creating the token
             access_token = create_access_token(identity=str(user['id']))
             response = jsonify({"msg": "Login successful"})
             set_access_cookies(response, access_token)
