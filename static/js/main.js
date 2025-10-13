@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Handling the Login Form Submission ---
     const loginForm = document.querySelector('form');
     if (loginForm && window.location.pathname === '/login') {
         loginForm.addEventListener('submit', async (e) => {
@@ -12,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('/login', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json' // This header is crucial
+                        'Content-Type': 'application/json' 
                     },
                     body: JSON.stringify(data)
                 });
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Handling the Logout button click ---
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', async (e) => {
@@ -52,39 +50,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Buy Token button logic ---
-    const buyButtons = document.querySelectorAll('.btn-buy');
-    buyButtons.forEach(button => {
-        button.addEventListener('click', async (e) => {
-            const aiId = e.target.getAttribute('data-ai-id');
-            
-            try {
-                const response = await fetch(`/buy_ai/${aiId}`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
-                if (response.status === 401) {
-                    alert('You must be logged in to buy an AI.');
-                    window.location.href = "/login";
-                    return;
+const buyButtons = document.querySelectorAll('.btn-buy');
+
+const csrfToken = getCookie('csrf_access_token');
+
+if (!csrfToken) {
+    console.error("CSRF token cookie 'csrf_access_token' not found.");
+}
+
+buyButtons.forEach(button => {
+    button.addEventListener('click', async (e) => {
+        const aiId = e.target.getAttribute('data-ai-id');
+        
+        if (!csrfToken) {
+            alert('Security error: CSRF token missing. Please log in again.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/buy_ai/${aiId}`, {
+                method: 'POST',
+                credentials: 'include', 
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken 
                 }
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    alert(`Success: ${result.message}`);
-                } else {
-                    alert(`Error: ${result.message}`);
-                }
-            } catch (error) {
-                console.error('Fetch error:', error);
-                alert('An error occurred. Please try again.');
+            });
+
+            if (response.status === 401) {
+                alert('You must be logged in to buy an AI.');
+                window.location.href = "/login";
+                return;
             }
-        });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert(`Success: ${result.message}`);
+            } else {
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            alert('An error occurred. Please try again.');
+        }
     });
+});
 
-    // --- Dashboard tab switching logic ---
     const dashButtons = document.querySelectorAll('.dash-btn');
     const contentPanels = document.querySelectorAll('.content-panel');
 
@@ -98,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- View Details Popup Logic ---
     const detailsModal = document.getElementById('details-modal');
     const closeBtn = document.querySelector('.close-btn');
     const modalBody = document.querySelector('.modal-body');
